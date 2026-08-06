@@ -20,7 +20,7 @@ def _windows_ansi_encoding() -> str:
     import ctypes
 
     try:
-        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32 = getattr(ctypes, "WinDLL")("kernel32", use_last_error=True)
         get_acp = kernel32.GetACP
         get_acp.restype = ctypes.c_uint
         return f"cp{get_acp()}"
